@@ -1,0 +1,480 @@
+Created by PLY version 3.10 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    EQUAL
+    COMMA
+
+Grammar
+
+Rule 0     S' -> create
+Rule 1     create -> CREATE_P name ON table_name for to using with_c EXP_END
+Rule 2     name -> NAME
+Rule 3     table_name -> NAME
+Rule 4     for -> <empty>
+Rule 5     for -> FOR a_s_i_u_d
+Rule 6     a_s_i_u_d -> ALL
+Rule 7     a_s_i_u_d -> SELECT
+Rule 8     a_s_i_u_d -> INSERT
+Rule 9     a_s_i_u_d -> UPDATE
+Rule 10    a_s_i_u_d -> DELETE
+Rule 11    to -> <empty>
+Rule 12    to -> TO param_comma
+Rule 13    param_comma -> NAME comma
+Rule 14    param_comma -> PUBLIC comma
+Rule 15    param_comma -> CURRENT_USER comma
+Rule 16    param_comma -> SESSION_USER comma
+Rule 17    comma -> <empty>
+Rule 18    comma -> param_comma
+Rule 19    using -> <empty>
+Rule 20    using -> USING BRK_OPEN NAME BRK_CLOSE
+Rule 21    with_c -> <empty>
+Rule 22    with_c -> WITH_C BRK_OPEN NAME BRK_CLOSE
+
+Terminals, with rules where they appear
+
+ALL                  : 6
+BRK_CLOSE            : 20 22
+BRK_OPEN             : 20 22
+COMMA                : 
+CREATE_P             : 1
+CURRENT_USER         : 15
+DELETE               : 10
+EQUAL                : 
+EXP_END              : 1
+FOR                  : 5
+INSERT               : 8
+NAME                 : 2 3 13 20 22
+ON                   : 1
+PUBLIC               : 14
+SELECT               : 7
+SESSION_USER         : 16
+TO                   : 12
+UPDATE               : 9
+USING                : 20
+WITH_C               : 22
+error                : 
+
+Nonterminals, with rules where they appear
+
+a_s_i_u_d            : 5
+comma                : 13 14 15 16
+create               : 0
+for                  : 1
+name                 : 1
+param_comma          : 12 18
+table_name           : 1
+to                   : 1
+using                : 1
+with_c               : 1
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . create
+    (1) create -> . CREATE_P name ON table_name for to using with_c EXP_END
+
+    CREATE_P        shift and go to state 1
+
+    create                         shift and go to state 2
+
+state 1
+
+    (1) create -> CREATE_P . name ON table_name for to using with_c EXP_END
+    (2) name -> . NAME
+
+    NAME            shift and go to state 4
+
+    name                           shift and go to state 3
+
+state 2
+
+    (0) S' -> create .
+
+
+
+state 3
+
+    (1) create -> CREATE_P name . ON table_name for to using with_c EXP_END
+
+    ON              shift and go to state 5
+
+
+state 4
+
+    (2) name -> NAME .
+
+    ON              reduce using rule 2 (name -> NAME .)
+
+
+state 5
+
+    (1) create -> CREATE_P name ON . table_name for to using with_c EXP_END
+    (3) table_name -> . NAME
+
+    NAME            shift and go to state 7
+
+    table_name                     shift and go to state 6
+
+state 6
+
+    (1) create -> CREATE_P name ON table_name . for to using with_c EXP_END
+    (4) for -> .
+    (5) for -> . FOR a_s_i_u_d
+
+    TO              reduce using rule 4 (for -> .)
+    USING           reduce using rule 4 (for -> .)
+    WITH_C          reduce using rule 4 (for -> .)
+    EXP_END         reduce using rule 4 (for -> .)
+    FOR             shift and go to state 9
+
+    for                            shift and go to state 8
+
+state 7
+
+    (3) table_name -> NAME .
+
+    FOR             reduce using rule 3 (table_name -> NAME .)
+    TO              reduce using rule 3 (table_name -> NAME .)
+    USING           reduce using rule 3 (table_name -> NAME .)
+    WITH_C          reduce using rule 3 (table_name -> NAME .)
+    EXP_END         reduce using rule 3 (table_name -> NAME .)
+
+
+state 8
+
+    (1) create -> CREATE_P name ON table_name for . to using with_c EXP_END
+    (11) to -> .
+    (12) to -> . TO param_comma
+
+    USING           reduce using rule 11 (to -> .)
+    WITH_C          reduce using rule 11 (to -> .)
+    EXP_END         reduce using rule 11 (to -> .)
+    TO              shift and go to state 10
+
+    to                             shift and go to state 11
+
+state 9
+
+    (5) for -> FOR . a_s_i_u_d
+    (6) a_s_i_u_d -> . ALL
+    (7) a_s_i_u_d -> . SELECT
+    (8) a_s_i_u_d -> . INSERT
+    (9) a_s_i_u_d -> . UPDATE
+    (10) a_s_i_u_d -> . DELETE
+
+    ALL             shift and go to state 13
+    SELECT          shift and go to state 16
+    INSERT          shift and go to state 12
+    UPDATE          shift and go to state 15
+    DELETE          shift and go to state 17
+
+    a_s_i_u_d                      shift and go to state 14
+
+state 10
+
+    (12) to -> TO . param_comma
+    (13) param_comma -> . NAME comma
+    (14) param_comma -> . PUBLIC comma
+    (15) param_comma -> . CURRENT_USER comma
+    (16) param_comma -> . SESSION_USER comma
+
+    NAME            shift and go to state 19
+    PUBLIC          shift and go to state 22
+    CURRENT_USER    shift and go to state 21
+    SESSION_USER    shift and go to state 20
+
+    param_comma                    shift and go to state 18
+
+state 11
+
+    (1) create -> CREATE_P name ON table_name for to . using with_c EXP_END
+    (19) using -> .
+    (20) using -> . USING BRK_OPEN NAME BRK_CLOSE
+
+    WITH_C          reduce using rule 19 (using -> .)
+    EXP_END         reduce using rule 19 (using -> .)
+    USING           shift and go to state 23
+
+    using                          shift and go to state 24
+
+state 12
+
+    (8) a_s_i_u_d -> INSERT .
+
+    TO              reduce using rule 8 (a_s_i_u_d -> INSERT .)
+    USING           reduce using rule 8 (a_s_i_u_d -> INSERT .)
+    WITH_C          reduce using rule 8 (a_s_i_u_d -> INSERT .)
+    EXP_END         reduce using rule 8 (a_s_i_u_d -> INSERT .)
+
+
+state 13
+
+    (6) a_s_i_u_d -> ALL .
+
+    TO              reduce using rule 6 (a_s_i_u_d -> ALL .)
+    USING           reduce using rule 6 (a_s_i_u_d -> ALL .)
+    WITH_C          reduce using rule 6 (a_s_i_u_d -> ALL .)
+    EXP_END         reduce using rule 6 (a_s_i_u_d -> ALL .)
+
+
+state 14
+
+    (5) for -> FOR a_s_i_u_d .
+
+    TO              reduce using rule 5 (for -> FOR a_s_i_u_d .)
+    USING           reduce using rule 5 (for -> FOR a_s_i_u_d .)
+    WITH_C          reduce using rule 5 (for -> FOR a_s_i_u_d .)
+    EXP_END         reduce using rule 5 (for -> FOR a_s_i_u_d .)
+
+
+state 15
+
+    (9) a_s_i_u_d -> UPDATE .
+
+    TO              reduce using rule 9 (a_s_i_u_d -> UPDATE .)
+    USING           reduce using rule 9 (a_s_i_u_d -> UPDATE .)
+    WITH_C          reduce using rule 9 (a_s_i_u_d -> UPDATE .)
+    EXP_END         reduce using rule 9 (a_s_i_u_d -> UPDATE .)
+
+
+state 16
+
+    (7) a_s_i_u_d -> SELECT .
+
+    TO              reduce using rule 7 (a_s_i_u_d -> SELECT .)
+    USING           reduce using rule 7 (a_s_i_u_d -> SELECT .)
+    WITH_C          reduce using rule 7 (a_s_i_u_d -> SELECT .)
+    EXP_END         reduce using rule 7 (a_s_i_u_d -> SELECT .)
+
+
+state 17
+
+    (10) a_s_i_u_d -> DELETE .
+
+    TO              reduce using rule 10 (a_s_i_u_d -> DELETE .)
+    USING           reduce using rule 10 (a_s_i_u_d -> DELETE .)
+    WITH_C          reduce using rule 10 (a_s_i_u_d -> DELETE .)
+    EXP_END         reduce using rule 10 (a_s_i_u_d -> DELETE .)
+
+
+state 18
+
+    (12) to -> TO param_comma .
+
+    USING           reduce using rule 12 (to -> TO param_comma .)
+    WITH_C          reduce using rule 12 (to -> TO param_comma .)
+    EXP_END         reduce using rule 12 (to -> TO param_comma .)
+
+
+state 19
+
+    (13) param_comma -> NAME . comma
+    (17) comma -> .
+    (18) comma -> . param_comma
+    (13) param_comma -> . NAME comma
+    (14) param_comma -> . PUBLIC comma
+    (15) param_comma -> . CURRENT_USER comma
+    (16) param_comma -> . SESSION_USER comma
+
+    USING           reduce using rule 17 (comma -> .)
+    WITH_C          reduce using rule 17 (comma -> .)
+    EXP_END         reduce using rule 17 (comma -> .)
+    NAME            shift and go to state 19
+    PUBLIC          shift and go to state 22
+    CURRENT_USER    shift and go to state 21
+    SESSION_USER    shift and go to state 20
+
+    param_comma                    shift and go to state 25
+    comma                          shift and go to state 26
+
+state 20
+
+    (16) param_comma -> SESSION_USER . comma
+    (17) comma -> .
+    (18) comma -> . param_comma
+    (13) param_comma -> . NAME comma
+    (14) param_comma -> . PUBLIC comma
+    (15) param_comma -> . CURRENT_USER comma
+    (16) param_comma -> . SESSION_USER comma
+
+    USING           reduce using rule 17 (comma -> .)
+    WITH_C          reduce using rule 17 (comma -> .)
+    EXP_END         reduce using rule 17 (comma -> .)
+    NAME            shift and go to state 19
+    PUBLIC          shift and go to state 22
+    CURRENT_USER    shift and go to state 21
+    SESSION_USER    shift and go to state 20
+
+    param_comma                    shift and go to state 25
+    comma                          shift and go to state 27
+
+state 21
+
+    (15) param_comma -> CURRENT_USER . comma
+    (17) comma -> .
+    (18) comma -> . param_comma
+    (13) param_comma -> . NAME comma
+    (14) param_comma -> . PUBLIC comma
+    (15) param_comma -> . CURRENT_USER comma
+    (16) param_comma -> . SESSION_USER comma
+
+    USING           reduce using rule 17 (comma -> .)
+    WITH_C          reduce using rule 17 (comma -> .)
+    EXP_END         reduce using rule 17 (comma -> .)
+    NAME            shift and go to state 19
+    PUBLIC          shift and go to state 22
+    CURRENT_USER    shift and go to state 21
+    SESSION_USER    shift and go to state 20
+
+    param_comma                    shift and go to state 25
+    comma                          shift and go to state 28
+
+state 22
+
+    (14) param_comma -> PUBLIC . comma
+    (17) comma -> .
+    (18) comma -> . param_comma
+    (13) param_comma -> . NAME comma
+    (14) param_comma -> . PUBLIC comma
+    (15) param_comma -> . CURRENT_USER comma
+    (16) param_comma -> . SESSION_USER comma
+
+    USING           reduce using rule 17 (comma -> .)
+    WITH_C          reduce using rule 17 (comma -> .)
+    EXP_END         reduce using rule 17 (comma -> .)
+    NAME            shift and go to state 19
+    PUBLIC          shift and go to state 22
+    CURRENT_USER    shift and go to state 21
+    SESSION_USER    shift and go to state 20
+
+    param_comma                    shift and go to state 25
+    comma                          shift and go to state 29
+
+state 23
+
+    (20) using -> USING . BRK_OPEN NAME BRK_CLOSE
+
+    BRK_OPEN        shift and go to state 30
+
+
+state 24
+
+    (1) create -> CREATE_P name ON table_name for to using . with_c EXP_END
+    (21) with_c -> .
+    (22) with_c -> . WITH_C BRK_OPEN NAME BRK_CLOSE
+
+    EXP_END         reduce using rule 21 (with_c -> .)
+    WITH_C          shift and go to state 32
+
+    with_c                         shift and go to state 31
+
+state 25
+
+    (18) comma -> param_comma .
+
+    USING           reduce using rule 18 (comma -> param_comma .)
+    WITH_C          reduce using rule 18 (comma -> param_comma .)
+    EXP_END         reduce using rule 18 (comma -> param_comma .)
+
+
+state 26
+
+    (13) param_comma -> NAME comma .
+
+    USING           reduce using rule 13 (param_comma -> NAME comma .)
+    WITH_C          reduce using rule 13 (param_comma -> NAME comma .)
+    EXP_END         reduce using rule 13 (param_comma -> NAME comma .)
+
+
+state 27
+
+    (16) param_comma -> SESSION_USER comma .
+
+    USING           reduce using rule 16 (param_comma -> SESSION_USER comma .)
+    WITH_C          reduce using rule 16 (param_comma -> SESSION_USER comma .)
+    EXP_END         reduce using rule 16 (param_comma -> SESSION_USER comma .)
+
+
+state 28
+
+    (15) param_comma -> CURRENT_USER comma .
+
+    USING           reduce using rule 15 (param_comma -> CURRENT_USER comma .)
+    WITH_C          reduce using rule 15 (param_comma -> CURRENT_USER comma .)
+    EXP_END         reduce using rule 15 (param_comma -> CURRENT_USER comma .)
+
+
+state 29
+
+    (14) param_comma -> PUBLIC comma .
+
+    USING           reduce using rule 14 (param_comma -> PUBLIC comma .)
+    WITH_C          reduce using rule 14 (param_comma -> PUBLIC comma .)
+    EXP_END         reduce using rule 14 (param_comma -> PUBLIC comma .)
+
+
+state 30
+
+    (20) using -> USING BRK_OPEN . NAME BRK_CLOSE
+
+    NAME            shift and go to state 33
+
+
+state 31
+
+    (1) create -> CREATE_P name ON table_name for to using with_c . EXP_END
+
+    EXP_END         shift and go to state 34
+
+
+state 32
+
+    (22) with_c -> WITH_C . BRK_OPEN NAME BRK_CLOSE
+
+    BRK_OPEN        shift and go to state 35
+
+
+state 33
+
+    (20) using -> USING BRK_OPEN NAME . BRK_CLOSE
+
+    BRK_CLOSE       shift and go to state 36
+
+
+state 34
+
+    (1) create -> CREATE_P name ON table_name for to using with_c EXP_END .
+
+    $end            reduce using rule 1 (create -> CREATE_P name ON table_name for to using with_c EXP_END .)
+
+
+state 35
+
+    (22) with_c -> WITH_C BRK_OPEN . NAME BRK_CLOSE
+
+    NAME            shift and go to state 37
+
+
+state 36
+
+    (20) using -> USING BRK_OPEN NAME BRK_CLOSE .
+
+    WITH_C          reduce using rule 20 (using -> USING BRK_OPEN NAME BRK_CLOSE .)
+    EXP_END         reduce using rule 20 (using -> USING BRK_OPEN NAME BRK_CLOSE .)
+
+
+state 37
+
+    (22) with_c -> WITH_C BRK_OPEN NAME . BRK_CLOSE
+
+    BRK_CLOSE       shift and go to state 38
+
+
+state 38
+
+    (22) with_c -> WITH_C BRK_OPEN NAME BRK_CLOSE .
+
+    EXP_END         reduce using rule 22 (with_c -> WITH_C BRK_OPEN NAME BRK_CLOSE .)
+
